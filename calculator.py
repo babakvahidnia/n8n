@@ -30,13 +30,14 @@ def calculator():
                 print("Goodbye!")
                 break
             
-            # Validate the operation choice
+            # Validate the operation choice; prompt again if invalid
             if choice not in ['1', '2', '3', '4']:
                 print("Invalid input. Please enter 1-5.")
                 continue
             
-            # Prompt for operands and convert them to float
+            # Prompt user for the first operand and convert to float
             num1 = float(input("Enter first number: "))
+            # Prompt user for the second operand and convert to float
             num2 = float(input("Enter second number: "))
             
             # Perform the selected operation and display the result
@@ -55,12 +56,14 @@ def calculator():
             elif choice == '4':
                 # Division with zero-division guard
                 if num2 == 0:
+                    # Handle division by zero error
                     print("Error: Division by zero is not allowed!")
                 else:
+                    # Perform division
                     result = num1 / num2
                     print(f"{num1} ÷ {num2} = {result}")
         
-        # Handle cases where number conversion fails (e.g., non-numeric input)
+        # Handle cases where number conversion fails (invalid numeric input)
         except ValueError:
             print("Invalid input. Please enter valid numbers.")
 
