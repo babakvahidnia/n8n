@@ -1,6 +1,6 @@
-# Simple console-based calculator with basic arithmetic operations.
-# The program presents a menu, accepts user input, performs the chosen operation,
-# and displays the result. It continues until the user chooses to exit.
+# ماشین‌حساب ساده مبتنی بر کنسول با عملیات حسابی پایه.
+# این برنامه یک منو ارائه می‌کند، ورودی کاربر را می‌پذیرد، عملیات انتخاب‌شده را انجام می‌دهد
+# و نتیجه را نمایش می‌دهد. تا زمانی که کاربر خروج را انتخاب کند، به کار خود ادامه می‌دهد.
 
 def calculator():
     """Run a simple interactive calculator in the terminal.
@@ -9,64 +9,64 @@ def calculator():
     choose an operation and enter two numbers, until the user chooses
     to exit.
     """
-    # Display the calculator header and available operations
+    # نمایش سربرگ ماشین‌حساب و عملیات‌های در دسترس
     print("Simple Calculator")
     print("-----------------")
     print("Operations:")
     print("1. Addition (+)")
     print("2. Subtraction (-)")
     print("3. Multiplication (*)")
-    print("4. Division (/)")
+    print("4. Division (/)" )
     print("5. Exit")
     
-    # Main input loop: keep asking the user until they choose to exit
+    # حلقه ورودی اصلی: تا زمانی که کاربر خروج را انتخاب کند، از کاربر درخواست ورودی می‌گیرد
     while True:
         try:
-            # Get operation choice from the user as a string
+            # دریافت انتخاب عملیات از کاربر به صورت رشته
             choice = input("\nEnter your choice (1-5): ")
             
-            # If the user chooses '5', exit the calculator
+            # اگر کاربر گزینه '5' را انتخاب کند، ماشین حساب را خارج کنید
             if choice == '5':
                 print("Goodbye!")
                 break
             
-            # Validate the operation choice; prompt again if invalid
+            # اعتبارسنجی انتخاب عملیات؛ در صورت نامعتبر بودن دوباره از کاربر درخواست کنید
             if choice not in ['1', '2', '3', '4']:
                 print("Invalid input. Please enter 1-5.")
                 continue
             
-            # Prompt user for the first operand and convert to float
+            # کاربر را برای ورود عدد اول ورودی هدایت کنید و به مقدار اعشاری تبدیل کنید
             num1 = float(input("Enter first number: "))
-            # Prompt user for the second operand and convert to float
+            # کاربر را برای ورود عدد دوم ورودی هدایت کنید و به مقدار اعشاری تبدیل کنید
             num2 = float(input("Enter second number: "))
             
-            # Perform the selected operation and display the result
+            # انجام عملیات انتخاب‌شده و نمایش نتیجه
             if choice == '1':
-                # Addition
+                # جمع
                 result = num1 + num2
                 print(f"{num1} + {num2} = {result}")
             elif choice == '2':
-                # Subtraction
+                # تفریق
                 result = num1 - num2
                 print(f"{num1} - {num2} = {result}")
             elif choice == '3':
-                # Multiplication
+                # ضرب
                 result = num1 * num2
                 print(f"{num1} × {num2} = {result}")
             elif choice == '4':
-                # Division with zero-division guard
+                # تقسیم با بررسی تقسیم بر صفر
                 if num2 == 0:
-                    # Handle division by zero error
+                    # مدیریت خطای تقسیم بر صفر
                     print("Error: Division by zero is not allowed!")
                 else:
-                    # Perform division
+                    # انجام تقسیم
                     result = num1 / num2
                     print(f"{num1} ÷ {num2} = {result}")
         
-        # Handle cases where number conversion fails (invalid numeric input)
+        # مدیریت مواردی که تبدیل عددی ناموفق است (ورودی عددی نامعتبر)
         except ValueError:
             print("Invalid input. Please enter valid numbers.")
 
-# Run the calculator only if this script is executed directly
+# اجرای ماشین حساب تنها در صورتی که این اسکریپت مستقیماً اجرا شود
 if __name__ == "__main__":
     calculator()
