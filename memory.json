@@ -2,7 +2,7 @@
   {
     "step": 2,
     "instruction": "Add support for advanced mathematical operations such as exponentiation, square root, absolute value, factorial, logarithms, trigonometric functions, and percentage calculations using Python's math module.",
-    "decision": "Added a standalone calculator.py module using Python's math module. It provides validated functions and a calculate dispatcher for exponentiation, square root, absolute value, factorial, logarithms, trigonometric functions, and percentage calculations. Trigonometric inputs and outputs use radians, consistent with Python's math module.",
+    "decision": "Generated calculator.py as a dependency-free calculator API backed by Python's math module. It validates domains, supports pow, sqrt, abs, factorial, log/log10, sin/cos/tan, and percentage, and exposes calculate(operation, *args) for dispatch. Trigonometric values use radians; percentage(value, percent) returns value * percent / 100.",
     "file_name": "calculator.py"
   }
 ]
