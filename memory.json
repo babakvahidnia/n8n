@@ -1,8 +1,1 @@
-// Project memory
-module.exports = [
-  {
-    instruction: "Review the existing calculator code and identify its current input method, supported operators, and calculation flow so the advanced features can be integrated without breaking basic operations.",
-    decision: "No calculator source files were available through the provided GitHub memory/repository access, so no code-level conclusions were asserted. Request or expose the calculator files before integration.",
-    generated: "No code generated; review remains pending source access."
-  }
-];
+memory.js
