@@ -1,1 +1,16 @@
-memory.js
+[
+  {
+    "step": 3,
+    "instruction": "Connect the UI actions to the calculator logic, keep expression evaluation safe by avoiding unrestricted eval or by strictly validating supported input, and preserve compatibility with the existing project structure.",
+    "retry_count": 1,
+    "code_generation": "yes",
+    "decision": "Use the existing calculator.py module with a reusable controller, route UI actions through dispatch, and evaluate only a restricted arithmetic AST; do not use unrestricted eval."
+  },
+  {
+    "step": 4,
+    "instruction": "Connect the UI actions to the calculator logic, keep expression evaluation safe by avoiding unrestricted eval or by strictly validating supported input, and preserve compatibility with the existing project structure.",
+    "retry_count": 2,
+    "code_generation": "yes",
+    "decision": "Provide calculator.py-compatible Python code with safe AST evaluation and UI action handlers for digits, operators, clear, backspace, decimal, sign, and equals."
+  }
+]
