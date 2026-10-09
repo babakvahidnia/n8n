@@ -1,1 +1,15 @@
-memory.js
+[
+  {
+    "instruction": "Review calculator.py before adding UI",
+    "decision": "Reuse evaluate(), format_result(), CalculatorError, and SafeEvaluator; existing file already includes a Tkinter UI. Keep AST-based safe evaluation and improve validation before UI changes.",
+    "findings": [
+      "Supports numeric constants, +, -, *, /, parentheses, and unary +/-; rejects names, calls, attributes, and other AST nodes.",
+      "Literal division by zero is converted to CalculatorError('Cannot divide by zero'), but computed zero denominators can leak ZeroDivisionError.",
+      "evaluate() maps syntax/value/overflow errors to 'Incomplete or invalid expression'; non-string input and some runtime errors are not normalized.",
+      "UI accepts transient incomplete expressions, displays errors as results, and clears/replaces the expression after any calculation attempt.",
+      "format_result() uses 12 significant digits and returns '0' for zero.",
+      "Decimal-entry logic is basic and may behave awkwardly around unary operators or incomplete operator sequences; no explicit length/range validation exists."
+    ],
+    "code_generation": "no"
+  }
+]
