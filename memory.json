@@ -17,7 +17,7 @@
     "step": 3,
     "instruction": "Connect the UI actions to the calculator logic, keep expression evaluation safe by avoiding unrestricted eval or by strictly validating supported input, and preserve compatibility with the existing project structure.",
     "retry_count": 2,
-    "code_generation": "yes",
-    "decision": "Use calculator.py with safe AST evaluation and a dispatch-based UI controller for digits, operators, clear, backspace, decimal, sign, and equals."
+    "instruction_summary": "Connect UI actions to calculator logic with safe expression evaluation.",
+    "decision": "Use the existing calculator.py file with a dispatch-based controller and an allow-listed AST evaluator. Support digits, decimal, operators, clear, backspace, sign, and equals without unrestricted eval."
   }
 ]
