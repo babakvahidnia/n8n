@@ -1,14 +1,1 @@
-[
-  {
-    "step": 1,
-    "instruction": "Review the existing calculator.py implementation and determine whether its calculation logic can be reused or should be refactored before adding the UI.",
-    "retry_count": 1,
-    "code_generation": "no",
-    "toolCallId": "call_lnzH6o5zcwM32VzdYSTbrCtk"
-  },
-  {
-    "step": 2,
-    "decision": "Reuse the SafeEvaluator/evaluate/format_result calculation logic, but refactor it out of the Tkinter CalculatorApp before adding or expanding the UI. Keep UI callbacks thin; add focused tests and consider Decimal if exact financial precision is required.",
-    "generated": "No code generated; review only."
-  }
-]
+memory.js
