@@ -1,1 +1,8 @@
-memory.js
+[
+  {
+    "step": 1,
+    "instruction": "Define calculator scope and Persian requirements",
+    "decision": "Create calculator_scope.md as a product and acceptance specification; retain existing Python calculator files unchanged until implementation is requested.",
+    "generated": "Specified bilingual Persian/English labels, RTL layout, Persian numerals and separators, keyboard input, scientific operations, memory, history, parentheses, validation, and Persian error messages."
+  }
+]
