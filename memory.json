@@ -1,1 +1,111 @@
-memory.js
+import ast
+import operator
+import tkinter as tk
+from tkinter import messagebox
+
+
+_ALLOWED_OPERATORS = {
+    ast.Add: operator.add,
+    ast.Sub: operator.sub,
+    ast.Mult: operator.mul,
+    ast.Div: operator.truediv,
+}
+
+
+def evaluate(expression: str) -> float:
+    """Evaluate only numeric expressions using +, -, *, and /."""
+    expression = expression.strip()
+    if not expression:
+        raise ValueError("Enter an expression")
+
+    def visit(node):
+        if isinstance(node, ast.Expression):
+            return visit(node.body)
+        if isinstance(node, ast.Constant) and isinstance(node.value, (int, float)):
+            return node.value
+        if isinstance(node, ast.UnaryOp) and isinstance(node.op, (ast.UAdd, ast.USub)):
+            value = visit(node.operand)
+            return value if isinstance(node.op, ast.UAdd) else -value
+        if isinstance(node, ast.BinOp) and type(node.op) in _ALLOWED_OPERATORS:
+            left = visit(node.left)
+            right = visit(node.right)
+            if isinstance(node.op, ast.Div) and right == 0:
+                raise ZeroDivisionError
+            return _ALLOWED_OPERATORS[type(node.op)](left, right)
+        raise ValueError("Only basic arithmetic is supported")
+
+    return visit(ast.parse(expression, mode="eval"))
+
+
+def format_result(value: float) -> str:
+    return str(int(value)) if value == int(value) else str(value)
+
+
+class Calculator(tk.Tk):
+    def __init__(self):
+        super().__init__()
+        self.title("Calculator")
+        self.resizable(False, False)
+        self.expression = tk.StringVar()
+        self.just_calculated = False
+        self._build_ui()
+        self.bind("<Return>", lambda _: self.calculate())
+        self.bind("<Escape>", lambda _: self.clear())
+        self.bind("<BackSpace>", lambda _: self.delete())
+
+    def _build_ui(self):
+        display = tk.Entry(
+            self, textvariable=self.expression, justify="right",
+            font=("TkDefaultFont", 22), width=16, state="readonly",
+            readonlybackground="white", relief="sunken", bd=4,
+        )
+        display.grid(row=0, column=0, columnspan=4, padx=8, pady=8, ipady=8)
+
+        buttons = [
+            ("C", self.clear), ("DEL", self.delete), ("/", lambda: self.press("/")), ("*", lambda: self.press("*")),
+            ("7", lambda: self.press("7")), ("8", lambda: self.press("8")), ("9", lambda: self.press("9")), ("-", lambda: self.press("-")),
+            ("4", lambda: self.press("4")), ("5", lambda: self.press("5")), ("6", lambda: self.press("6")), ("+", lambda: self.press("+")),
+            ("1", lambda: self.press("1")), ("2", lambda: self.press("2")), ("3", lambda: self.press("3")), ("=", self.calculate),
+            ("0", lambda: self.press("0")), (".", lambda: self.press(".")),
+        ]
+        for index, (label, command) in enumerate(buttons):
+            row, column = divmod(index, 4)
+            button = tk.Button(self, text=label, command=command, width=5, height=2, font=("TkDefaultFont", 13))
+            button.grid(row=row + 1, column=column, padx=3, pady=3, sticky="nsew")
+        self.grid_columnconfigure(0, weight=1)
+        self.grid_columnconfigure(1, weight=1)
+        self.grid_columnconfigure(2, weight=1)
+        self.grid_columnconfigure(3, weight=1)
+        self.grid_rowconfigure(5, weight=1)
+
+    def press(self, value: str):
+        if self.just_calculated and (value.isdigit() or value == "."):
+            self.expression.set("")
+        self.just_calculated = False
+        current = self.expression.get()
+        if value == ".":
+            number = current.split("+")[-1].split("-")[-1].split("*")[-1].split("/")[-1]
+            if "." in number:
+                return
+        self.expression.set(current + value)
+
+    def clear(self):
+        self.expression.set("")
+        self.just_calculated = False
+
+    def delete(self):
+        self.expression.set(self.expression.get()[:-1])
+        self.just_calculated = False
+
+    def calculate(self):
+        try:
+            self.expression.set(format_result(evaluate(self.expression.get())))
+            self.just_calculated = True
+        except ZeroDivisionError:
+            messagebox.showerror("Error", "Cannot divide by zero")
+        except (SyntaxError, ValueError, TypeError, OverflowError):
+            messagebox.showerror("Error", "Enter a valid arithmetic expression")
+
+
+if __name__ == "__main__":
+    Calculator().mainloop()
