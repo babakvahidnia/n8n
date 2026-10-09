@@ -1,1 +1,6 @@
-memory.js
+[
+  {
+    "decision": "Updated the existing calculator.py implementation rather than creating a new file.",
+    "generated": "Tkinter calculator UI with numeric/decimal input, + - × ÷, equals, clear, backspace, AST-based precedence-safe evaluation, decimal support, division-by-zero protection, readable errors, and keyboard support."
+  }
+]
